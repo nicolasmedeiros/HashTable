@@ -29,7 +29,6 @@ public class MyClosedHash<K, V> implements MyHash<K, V> {
     public void put(K key, V value) {
         int hash = key.hashCode() % tableSize;
 
-
         while (hashTable[hash] != null && !hashTable[hash].isDeleted()) {
             hash = (hash + 1) % tableSize;
         }

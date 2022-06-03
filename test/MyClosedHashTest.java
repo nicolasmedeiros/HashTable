@@ -75,4 +75,26 @@ class MyClosedHashTest {
             assertEquals("mundo", hashTable.get(11));
         }
     }
+
+
+    @Nested
+    @DisplayName("con key compleja")
+    class AddConKeyCompleja {
+
+        MyHash<Persona, String> hashTablePersona;
+
+        @BeforeEach
+        void createNewHashTable() {
+            hashTablePersona = new MyClosedHash<>();
+        }
+
+        @Test
+        @DisplayName("add agrega un elemento y size retorna 1")
+        void testPut() {
+            Persona p = new Persona("John");
+            hashTablePersona.put(p, "hola");
+            assertEquals(1, hashTablePersona.size());
+            assertEquals("hola", hashTablePersona.get(p));
+        }
+    }
 }
