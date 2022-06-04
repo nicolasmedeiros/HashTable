@@ -29,6 +29,7 @@ public class MyClosedHash<K, V> implements MyHash<K, V> {
     public void put(K key, V value) {
         int hash = key.hashCode() % tableSize;
 
+        // FIXME: controlar que al hacer rehash el loop termine en algun momento
         while (hashTable[hash] != null && !hashTable[hash].isDeleted()) {
             hash = (hash + 1) % tableSize;
         }
@@ -39,12 +40,15 @@ public class MyClosedHash<K, V> implements MyHash<K, V> {
     @Override
     public V get(K key) {
         int hash = key.hashCode() % tableSize;
+        
+        // FIXME: controlar que al hacer rehash el loop termine en algun momento
         while (hashTable[hash] != null ) {
             if (hashTable[hash].getKey().equals(key) && !hashTable[hash].isDeleted()) {
                 return (V) hashTable[hash].getValue();
             }
             hash = (hash + 1) % tableSize;
         }
+        
         return null;
     }
 
